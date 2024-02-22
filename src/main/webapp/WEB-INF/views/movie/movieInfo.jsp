@@ -71,7 +71,8 @@
 					<span class="star align-middle">
 				  		★★★★★
 					  	<span>★★★★★</span>
-						<input type="number" id="starRating" name="starRating" oninput="drawStar(this)" value="0" step="0.5" min="0" max="5" onclick="starRatingOnClick(event)"/>
+						<input type="number" id="starRating" name="starRating" oninput="drawStar(this)" 
+								value="0" step="0.5" min="0" max="5" onclick="starRatingOnClick(event)"/>
 						<input type="hidden" id="updateStarRatingForm">
 				  	</span>
 			  	</form>
@@ -595,8 +596,6 @@ window.addEventListener("DOMContentLoaded", function () {
 	       
 	        const starSpan = document.querySelector('.star span');
 	        starSpan.style.width = rating * 20 + '%';
-	        
-	     
 	       
 	    }
 	   	

@@ -46,13 +46,12 @@ public class ReviewControllerImpl implements ReviewController{
 	@RequestMapping(value="/movie/moreReviews")
 	public ModelAndView moreMovieReview(@RequestParam("movie_id") String movie_id) throws Exception{
 		
+		ModelAndView mav = new ModelAndView("/movie/movieReviews");
+		
 		List<ReviewDTO> reviewList = movieService.selectAllReview(movie_id);
-		for (ReviewDTO reviewDTO : reviewList) {
-		    System.out.println(reviewDTO.getMemberImgName());
-		}
 		MovieDTO movieDTO =movieService.selectMovieDTO(movie_id);
 		String movieNm = movieDTO.getMovieNm();
-		ModelAndView mav = new ModelAndView("/movie/movieReviews");
+		
 		mav.addObject("reviewList",reviewList);
 		mav.addObject("movieNm", movieNm);
 		return mav;
