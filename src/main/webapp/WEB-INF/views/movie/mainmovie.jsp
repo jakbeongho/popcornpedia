@@ -39,7 +39,7 @@
 				<span>${date } 일별 박스오피스</span>
 			</h5>
 			<div class="rank-container row g-0 justify-content-center">
-				<div class="rank-poster col me-5">
+				<div class="rank-poster col">
 					<c:forEach var="poster" items="${posterPathList }"><img class="rounded-2" src="${poster }"></c:forEach>
 				</div>
 				<div class="rank-list col-7">
