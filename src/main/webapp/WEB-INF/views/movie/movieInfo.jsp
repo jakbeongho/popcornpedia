@@ -196,8 +196,11 @@
 			</div>
 		</div><!-- 여기까지 flex 클래스 div -->	
 		
-			<div  class="flex justify-content-between " style="margin:0 auto;">
-				<h4>리뷰 <span>count </span><a href="${contextPath }/movie/moreReviews?movie_id=${dto.movie_id}">더보기</a></h4>
+		<div  class="flex justify-content-between " style="margin:0 auto;">
+				<div class="flex">
+					<h4>리뷰 <span id="reviewCnt" class="me-2"> </span>
+					</h4> <h4 id="moreReviewsLink"></h4>
+				</div>
 				<div class="flex avgStarRating-hover">
 					<h4>평균 별점</h4>
 					<div id="avgStarRatingSection" class="align-middle"></div> <!-- 평균 별점 -->
@@ -668,6 +671,23 @@ window.addEventListener("DOMContentLoaded", function () {
     	        }
     	    });
     	});
+      
+      
+      function countMovieReview(){
+ 		 $.ajax({
+ 			 type:"GET",
+ 			 url:"${contextPath }/movie/countMovieReview.do",
+ 			 data:{'movie_id' : movie_id},
+ 			 success: function(movieCnt){
+ 				 $('#reviewCnt').text(movieCnt);
+ 				 if (movieCnt > 8) {
+ 		                $('#moreReviewsLink').html('<a href="${contextPath}/movie/moreReviews?movie_id=' + movie_id + '">더보기</a>');
+ 		            }
+ 		        }
+ 			
+ 		 });
+ 		 
+ 	 }
 
 </script>
 </html>
