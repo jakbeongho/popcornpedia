@@ -97,10 +97,10 @@
 									<li class="border-bottom" >
 										<div class="row my-3">
 											<div class="col-6">
-												<p class="fs-5"><span class="fw-bold me-4 fs-4">${loop.index + 1}</span><c:out value="${movieDirector['movieDirector']}"/></p>  
+												<p class="fs-5"><span class="fw-bold me-4 fs-4">${loop.index + 1}</span>${movieDirector.key }</p>  
 											</div>
 											<div class="col-6" >
-												<p class="text-end "><c:out value="${movieDirector['count']}"/>편 </p>
+												<p class="text-end ">${movieDirector.value }편 </p>
 											</div>
 										</div>	
 									</li>
@@ -128,10 +128,10 @@
 										<li class="border-bottom" >
 											<div class="row my-3">
 												<div class="col-6">
-													<p class="fs-5"><span class="fw-bold me-4 fs-4">${loop.index + 1}</span><c:out value="${movieNation['movieNation']}"/></p>  
+													<p class="fs-5"><span class="fw-bold me-4 fs-4">${loop.index + 1}</span>${movieNation.key }</p>  
 												</div>
 												<div class="col-6" >
-													<p class="text-end "><c:out value="${movieNation['count']}"/>편 </p>
+													<p class="text-end ">${movieNation.value }편 </p>
 												</div>
 											</div>	
 										</li>

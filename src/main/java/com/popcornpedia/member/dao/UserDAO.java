@@ -27,8 +27,8 @@ public interface UserDAO {
 	public double maxMyStarRating(String member_id);
 	public List<Map<String, Object>> tasteMyStarRating(String member_id);
 	public int countWatchTime(String member_id);
-	public List<Map<String, Object>> tasteMovieNation(String member_id);
-	public List<Map<String, Object>> tasteMovieDirector(String member_id);
+	public List<String> tasteMovieNation(String member_id);
+	public List<String> tasteMovieDirector(String member_id);
 	public List<String> tasteMovieActor(String member_id);
 	public List<String> tasteMovieGenre(String member_id);
 	public int updateEmail(@RequestBody HashMap<String, Object> emailMap) throws Exception;

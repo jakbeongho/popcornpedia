@@ -126,15 +126,15 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public List<Map<String, Object>> tasteMovieNation(String member_id) {
-		List<Map<String, Object>> tasteMovieNation = sqlSession.selectList("mapper.starRating.tasteMovieNation", member_id);
+	public List<String> tasteMovieNation(String member_id) {
+		List<String> tasteMovieNation = sqlSession.selectList("mapper.starRating.tasteMovieNation", member_id);
 		return tasteMovieNation;
 	}
 
 
 	@Override
-	public List<Map<String, Object>> tasteMovieDirector(String member_id) {
-		List<Map<String, Object>> tasteMovieDirector = sqlSession.selectList("mapper.starRating.tasteMovieDirector", member_id);
+	public List<String> tasteMovieDirector(String member_id) {
+		List<String> tasteMovieDirector = sqlSession.selectList("mapper.starRating.tasteMovieDirector", member_id);
 		return tasteMovieDirector;
 	}
 

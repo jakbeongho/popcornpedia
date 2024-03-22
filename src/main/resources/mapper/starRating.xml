@@ -22,6 +22,8 @@
 	    <result column="rating" property="rating" />
 	    <result column="rating_count" property="ratingCount" />
 	</resultMap>
+	
+
  	
  	
  	<!--별점 등록-->
@@ -158,28 +160,23 @@
  		]]>
  	</select>
  	
- 	<select id="tasteMovieNation" parameterType="String" resultType="java.util.Map" >
+ 	<select id="tasteMovieNation" parameterType="String" resultType="java.lang.String" >
  		<![CDATA[
- 			Select movielist.movieNation as movieNation, COUNT(*) AS count
-			from starrating 
+			SELECT movielist.movieNation as movieNation
+			from starrating
 			left join movielist ON starrating.movie_id = movielist.movie_id
 			where member_id = #{member_id}
-			GROUP BY movielist.movieNation
-			ORDER BY count DESC;
  		]]>
  	</select>
  	
- 	<select id="tasteMovieDirector" parameterType="String" resultType="java.util.Map">
+ 	<select id="tasteMovieDirector" parameterType="String" resultType="java.lang.String">
  		<![CDATA[
- 			Select movielist.movieDirector as movieDirector, COUNT(*) AS count
-			from starrating 
+			SELECT movielist.movieDirector as movieDirector
+			from starrating
 			left join movielist ON starrating.movie_id = movielist.movie_id
 			where member_id = #{member_id}
-			GROUP BY movielist.MovieDirector
-			HAVING COUNT(*) >= 2
-			ORDER BY count DESC
-			LIMIT 10;
  		]]>
+
  	</select>
  	
  	<select id="tasteMovieActor" parameterType="String" resultType="java.lang.String">

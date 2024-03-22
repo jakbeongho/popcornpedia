@@ -275,8 +275,8 @@ public class UserControllerImpl implements UserController{
 		ObjectMapper objectMapper = new ObjectMapper();
 		String tasteStar = objectMapper.writeValueAsString(tasteStarData);
 		
-		List<Map<String,Object>> tasteMovieNation = userService.tasteMovieNation(member_id);
-		List<Map<String,Object>> tasteMovieDirector = userService.tasteMovieDirector(member_id);
+		List<Map.Entry<String, Integer>> tasteMovieNation = userService.tasteMovieNation(member_id);
+		List<Map.Entry<String, Integer>> tasteMovieDirector = userService.tasteMovieDirector(member_id);
 		List<Map.Entry<String, Integer>> tasteMovieActor = userService.tasteMovieActor(member_id);
 		List<Map.Entry<String, Integer>> tasteMovieGenre = userService.tasteMovieGenre(member_id);
 		

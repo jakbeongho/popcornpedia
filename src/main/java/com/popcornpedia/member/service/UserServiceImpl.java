@@ -160,15 +160,40 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public List<Map<String, Object>> tasteMovieNation(String member_id) {
-		List<Map<String,Object>> tasteMovieNation = userDAO.tasteMovieNation(member_id);
+	public List<Map.Entry<String, Integer>> tasteMovieNation(String member_id) {
+		Map<String, Integer> nationCounts = new HashMap();
+		
+		List<String> nationList = userDAO.tasteMovieNation(member_id);
+		
+		for(String nation : nationList) {
+			if(nation != null) {
+				nationCounts.put(nation, nationCounts.getOrDefault(nation, 0)+1);
+			}
+			
+		}
+		List<Map.Entry<String, Integer>> tasteMovieNation = new ArrayList<>(nationCounts.entrySet());
+		tasteMovieNation.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+		
 		return tasteMovieNation;
 	}
 	
 
 	@Override
-	public List<Map<String, Object>> tasteMovieDirector(String member_id) {
-		List<Map<String,Object>> tasteMovieDirector = userDAO.tasteMovieDirector(member_id);
+	public List<Map.Entry<String, Integer>> tasteMovieDirector(String member_id) {
+		
+		Map<String, Integer> directorCounts = new HashMap();
+		
+		List<String> directorList = userDAO.tasteMovieDirector(member_id);
+		
+		for(String director : directorList ) {
+			if(director != null) {
+				directorCounts.put(director, directorCounts.getOrDefault(director,0)+1);	
+			}
+		}
+		
+		List<Map.Entry<String, Integer>> tasteMovieDirector = new ArrayList<>(directorCounts.entrySet());
+		tasteMovieDirector.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+		
 		return tasteMovieDirector;
 	}
 

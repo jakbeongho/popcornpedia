@@ -28,8 +28,8 @@ public interface UserService {
 	public int countMyStarRatings(String member_id);
 	public double maxMyStarRating(String member_id);
 	public List<Map<String, Object>> tasteMyStarRating(String member_id);
-	public List<Map<String, Object>> tasteMovieNation(String member_id);
-	public List<Map<String, Object>> tasteMovieDirector(String member_id);
+	public List<Map.Entry<String, Integer>> tasteMovieNation(String member_id);
+	public List<Map.Entry<String, Integer>>tasteMovieDirector(String member_id);
 	public int countWatchTime(String member_id);
 	public List<Map.Entry<String, Integer>> tasteMovieActor(String member_id);
 	public List<Map.Entry<String, Integer>> tasteMovieGenre(String member_id);
