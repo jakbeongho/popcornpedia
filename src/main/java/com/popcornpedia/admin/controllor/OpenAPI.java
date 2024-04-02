@@ -44,7 +44,6 @@ public class OpenAPI {
 	String key = "aacda2bad5836d6156ba855b1db4461a"; //Kobis(영진위) 발급키 
 	KobisOpenAPIRestService service = new KobisOpenAPIRestService(key);
 	
-	
 	//메인 화면
 	@RequestMapping( value =  {"/", "/movie/mainMovie"})
 	public ModelAndView getBoxOfficeKobis(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -82,15 +81,19 @@ public class OpenAPI {
 		HashMap<String, Object> dailyResult = mapper.readValue(dailyResponse, HashMap.class); //가져온 json정보를 hashmap에 담는다.
 		request.setAttribute("dailyResult", dailyResult);
 		
-		//박스오피스 포스터 이미지 담기(이미지 없으면 준비중.png) 
+		//박스오피스 포스터 이미지 담기(이미지 없으면 준비중.png)
+		
 		JSONObject obj = new JSONObject(dailyResult);
-		List<String> posterPathList = new ArrayList<>();
+		List<Map<String,String>> posterElementList = new ArrayList<>();
 		for(int i=0; i<10; i++) {
-			String movie_Cd = obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("movieCd");
-			String movie_id = String.valueOf(movieService.getMovieID(movie_Cd));
-			MovieDTO dto = movieService.selectOneMovie(movie_id);
-			String poster = (dto != null) ? "http://image.tmdb.org/t/p/w500"+dto.getMoviePosterPath() : "/popcornpedia/resources/images/movie/ready300.png";
-			posterPathList.add(poster);
+			
+			Map<String,String> posterElement = new HashMap<>();
+			
+			posterElement.put("movieNm",obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("movieNm"));
+			posterElement.put("movieYear",obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("openDt").substring(0,4));
+			
+			posterElementList.add(posterElement);
+			
 		}
 		
 		//누적 관객수를 만 단위로 표시하고 JSON에 추가하기
@@ -127,8 +130,7 @@ public class OpenAPI {
 		SimpleDateFormat dateformat2 = new SimpleDateFormat("yyyy-MM-dd");
 		String date2 = dateformat2.format(yesterday);
 		request.setAttribute("date", date2);
-		request.setAttribute("posterPathList", posterPathList);
-		
+		request.setAttribute("posterElementList",posterElementList);
 
 		
 		/*		

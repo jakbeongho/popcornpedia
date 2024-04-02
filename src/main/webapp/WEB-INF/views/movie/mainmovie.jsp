@@ -40,7 +40,7 @@
 			</h5>
 			<div class="rank-container row g-0 justify-content-center">
 				<div class="rank-poster col">
-					<c:forEach var="poster" items="${posterPathList }"><img class="rounded-2" src="${poster }"></c:forEach>
+					<c:forEach var="poster" items="${posterElementList }" varStatus="loop"><img class="rounded-2 poster-container" src="" data-movienm=${poster.movieNm } data-movieyear=${poster.movieYear } data-index=${loop.index }></c:forEach>
 				</div>
 				<div class="rank-list col-7">
 					<c:forEach var="boxoffice" items="${dailyResult.boxOfficeResult.dailyBoxOfficeList}" >
@@ -166,7 +166,20 @@ $(document).ready(function() {
 	initVisual();
 	initializeSlide();
 	changePoster();
+	
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+	
+	var imgElements = document.querySelectorAll(".poster-container");
+    	imgElements.forEach(function(img) {
+        	var movieNm = img.dataset.movienm;
+        	var movieYear = img.dataset.movieyear;
+        	var index = img.dataset.index;
+        	getPoster(movieNm, movieYear, index);
+    });
+});
+
 
 // 가져온 포스터 이미지와 파일이름 배열
 const posterImgs = document.querySelector('.rank-poster');
@@ -236,5 +249,27 @@ function initializeSlide() {
     });
   });
 }
+
+function getPoster(movieNm,movieYear,index) {
+	  $.ajax({
+	    url: 'https://api.themoviedb.org/3/search/movie?query='+movieNm+'&include_adult=true&language=ko-kr&page=1&year='+movieYear,
+	    method: 'GET',
+	    headers: {
+	      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiY2E3YzVhYWUyM2NhMmEwODMwNDBmM2YxNzRmMTdhMiIsInN1YiI6IjY0ZWU5MDIxZTBjYTdmMDEwZGUyZDg2MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zpKwr_Vqp_h8YepA8M1_F53PTXjCU0EIipT3dsjk0Tk',
+	      'Accept': 'application/json'
+	    },
+	    success: function(data) {
+	    	console.log(data.results[0].poster_path);
+	   		$('.rank-poster img').eq(index).attr('src', 'http://image.tmdb.org/t/p/w500' + data.results[0].poster_path);
+	    },
+	    error: function(error) {
+	      console.error('Error:', error);
+	    }
+	  });
+	}
+	
+
+
+
 </script>
 </html>
