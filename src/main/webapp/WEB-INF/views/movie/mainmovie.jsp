@@ -162,22 +162,22 @@
 
 </body>
 <script>
-$(document).ready(function() {
-	initVisual();
-	initializeSlide();
-	changePoster();
-	
-});
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	
-	var imgElements = document.querySelectorAll(".poster-container");
-    	imgElements.forEach(function(img) {
+	var posterElements = document.querySelectorAll(".poster-container");
+    	posterElements.forEach(function(img) {
         	var movieNm = img.dataset.movienm;
         	var movieYear = img.dataset.movieyear;
         	var index = img.dataset.index;
         	getPoster(movieNm, movieYear, index);
     });
+    	
+    	initVisual();
+    	initializeSlide();
+    	changePoster();
+    	
 });
 
 
@@ -194,10 +194,7 @@ function initVisual() {
 	if (imgElements.length > 0) {
 		imgElements[0].style.display = 'block';
 	}
-	// 뒷배경을 1위 포스터 이미지로 지정
-	<c:forEach var="poster" items="${posterPathList}">
-		posterNames.push('${poster}');
-	</c:forEach>
+
 	let topRankPoster = imgPath + posterNames[0];
 	if (visualImg) {
 		visualImg.src = topRankPoster;
@@ -250,6 +247,8 @@ function initializeSlide() {
   });
 }
 
+
+
 function getPoster(movieNm,movieYear,index) {
 	  $.ajax({
 	    url: 'https://api.themoviedb.org/3/search/movie?query='+movieNm+'&include_adult=true&language=ko-kr&page=1&year='+movieYear,
@@ -259,8 +258,8 @@ function getPoster(movieNm,movieYear,index) {
 	      'Accept': 'application/json'
 	    },
 	    success: function(data) {
-	    	console.log(data.results[0].poster_path);
 	   		$('.rank-poster img').eq(index).attr('src', 'http://image.tmdb.org/t/p/w500' + data.results[0].poster_path);
+	   		posterNames.push(data.results[0].poster_path);
 	    },
 	    error: function(error) {
 	      console.error('Error:', error);
@@ -268,8 +267,6 @@ function getPoster(movieNm,movieYear,index) {
 	  });
 	}
 	
-
-
 
 </script>
 </html>
