@@ -89,9 +89,11 @@ public class OpenAPI {
 			
 			Map<String,String> posterElement = new HashMap<>();
 			
-			posterElement.put("movieNm",obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("movieNm"));
-			posterElement.put("movieYear",obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("openDt").substring(0,4));
+			String movieNm = obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("movieNm");
+			movieNm = normalize(movieNm);
 			
+			posterElement.put("movieNm",movieNm);
+			posterElement.put("movieYear",obj.getJSONObject("boxOfficeResult").getJSONArray("dailyBoxOfficeList").getJSONObject(i).getString("openDt").substring(0,4));
 			posterElementList.add(posterElement);
 			
 		}
@@ -479,5 +481,19 @@ public class OpenAPI {
 			ModelAndView mav = new ModelAndView("/movie/movieInfo");
 			return mav;	
 	}
+	
+	public static String normalize(String input) {
+        if (input == null) return null;
+        return input.replace("Ⅰ", "I")
+                    .replace("Ⅱ", "II")
+                    .replace("Ⅲ", "III")
+                    .replace("Ⅳ", "IV")
+                    .replace("Ⅴ", "V")
+                    .replace("Ⅵ", "VI")
+                    .replace("Ⅶ", "VII")
+                    .replace("Ⅷ", "VIII")
+                    .replace("Ⅸ", "IX")
+                    .replace("Ⅹ", "X");
+    }
 
 }

@@ -106,7 +106,7 @@ public class BoardControllerImpl implements BoardController {
 		// 작성 후 전체 조회로 redirect
 		ModelAndView mav = new ModelAndView("redirect:/board/");
 		return mav;
-		// [TODO] 파일 업로드 로직을 공통 모듈로 분리해 여러 곳에서 재사용할 수 있게 만들기 [DONE] FileService 인터페이스 구현
+		// [
 	}
 	
 	// 게시글 수정

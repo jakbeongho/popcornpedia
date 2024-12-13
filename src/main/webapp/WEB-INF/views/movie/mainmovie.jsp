@@ -40,7 +40,7 @@
 			</h5>
 			<div class="rank-container row g-0 justify-content-center">
 				<div class="rank-poster col">
-					<c:forEach var="poster" items="${posterElementList }" varStatus="loop"><img class="rounded-2 poster-container" src="" data-movienm=${poster.movieNm } data-movieyear=${poster.movieYear } data-index=${loop.index }></c:forEach>
+					<c:forEach var="poster" items="${posterElementList }" varStatus="loop"><img class="rounded-2 poster-container" src="" data-movienm="${poster.movieNm }" data-movieyear=${poster.movieYear } data-index=${loop.index }></c:forEach>
 				</div>
 				<div class="rank-list col-7">
 					<c:forEach var="boxoffice" items="${dailyResult.boxOfficeResult.dailyBoxOfficeList}" >

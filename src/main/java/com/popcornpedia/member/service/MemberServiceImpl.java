@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMember(MemberDTO memberDTO) throws DataAccessException {
 		return memberDAO.insertMember(memberDTO);
-		// [TODO] 이메일 인증 요청 필요
+		// [
 	}
 
 	@Override

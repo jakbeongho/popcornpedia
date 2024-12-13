@@ -49,7 +49,7 @@ public class MemberControllerImpl implements MemberController {
 		int result = memberService.insertMember(memberDTO);
 		if(result == 1) { // 회원 가입 완료되었으면
 			mav = new ModelAndView("/common/welcome");
-			// [TODO] 이메일 인증 요청 필요
+			// [
 			// [DONE] 이메일 인증 요청 메일 보내기 (비동기 방식으로 호출되어 뷰 이동과 동시에 실행됨)
 			mailSendController.sendMail(memberDTO.getMember_id(), memberDTO.getEmail());
 		}
